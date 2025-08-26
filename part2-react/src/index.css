@@ -116,3 +116,104 @@ h1 {
   color: red;
   font-weight: bold;
 }
+
+.meal-card {
+  transition: all 0.3s ease;
+}
+
+.meal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* ปรับ cursor สำหรับ meal cards */
+a .meal-card {
+  cursor: pointer;
+}
+
+/* Ingredients Section */
+.ingredients-section {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.ingredients-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ingredients-list li {
+  background: white;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  border-left: 4px solid #007bff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.ingredients-list li:hover {
+  transform: translateY(-2px);
+}
+
+/* Instructions Section */
+.instructions-section {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.instructions-text {
+  line-height: 1.8;
+  color: #333;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  white-space: pre-line;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Video Link */
+.video-link:hover {
+  background-color: #c82333 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .ingredients-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .ingredients-section,
+  .instructions-section {
+    padding: 1rem;
+  }
+  
+  .instructions-text {
+    padding: 1rem;
+  }
+}
+
+/* Loading Animation */
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 2rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

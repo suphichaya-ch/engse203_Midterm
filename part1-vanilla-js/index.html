@@ -15,12 +15,37 @@
                 <button type="submit">Search</button>
             </form>
         </header>
-        <main id="results-container">
-            <div id="results-grid" class="results-grid">
-                <p class="placeholder">Type something in the search box to find recipes!</p>
-            </div>
-        </main>
+
+        <!-- Search Results -->
+ <main id="results-container">
+    <div id="results-grid" class="results-grid">
+        <p class="placeholder">Type something in the search box to find recipes!</p>
     </div>
+</main>
+
+<!-- Meal Details Section (อยู่นอก main) -->
+<section id="meal-details-section" class="meal-details hidden">
+    <div class="container">
+        <button id="back-to-search-btn" class="back-button">
+            ← กลับไปค้นหาอาหาร
+        </button>
+
+        <div id="details-loading" class="loading-message hidden">
+            กำลังโหลดรายละเอียดอาหาร...
+        </div>
+        
+        <div id="details-error" class="error-message hidden">
+            เกิดข้อผิดพลาด ไม่สามารถโหลดข้อมูลได้
+        </div>
+        
+        <div id="meal-details-content" class="meal-details-content hidden">
+            <!-- เนื้อหารายละเอียดจะถูกสร้างด้วย JavaScript -->
+        </div>
+    </div>
+</section>
+
+
+    <!-- JS -->
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,95 +1,56 @@
-import React, { useState, useEffect } from 'react'
-import SearchBar from '../components/SearchBar'
-import MealCard from '../components/MealCard'
+import React, { useState, useEffect } from 'react';
+import SearchBar from '../components/SearchBar';
+import DrinkCard from '../components/DrinkCard';
+
+const API_BASE_URL = 'https://www.thecocktaildb.com/api/json/v1/1';
 
 function HomePage() {
-  // State variables (คัดลอกจาก V1)
-  const [meals, setMeals] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [drinks, setDrinks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // useEffect สำหรับ fetch ข้อมูล (คัดลอกจาก V1)
   useEffect(() => {
-    if (searchTerm.trim() === '') {
-      setMeals([])
-      return
+    if (!searchTerm) {
+      setDrinks([]);
+      return;
     }
 
-    const fetchMeals = async () => {
-      setIsLoading(true)
-      setError(null)
-
+    const fetchDrinks = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
-        console.log('ค้นหาคำว่า:', searchTerm)
-        
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`)
-        const data = await response.json()
-
-        console.log('ผลการค้นหา:', data)
-
-        if (data.meals) {
-          setMeals(data.meals)
-        } else {
-          setMeals([])
-        }
+        const response = await fetch(`${API_BASE_URL}/search.php?s=${searchTerm}`);
+        if (!response.ok) throw new Error('Something went wrong!');
+        const data = await response.json();
+        setDrinks(data.drinks || []);
       } catch (err) {
-        console.error('เกิดข้อผิดพลาดในการค้นหา:', err)
-        setError('เกิดข้อผิดพลาดในการค้นหา กรุณาลองใหม่อีกครั้ง')
-        setMeals([])
+        setError(err.message);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
-
-    fetchMeals()
-  }, [searchTerm])
-
-  // Handler function
-  const handleSearch = (term) => {
-    console.log('รับคำค้นหา:', term)
-    setSearchTerm(term)
-  }
+    };
+    
+    fetchDrinks();
+  }, [searchTerm]);
 
   return (
-    <>
+    <div>
       <header>
-        <h1>🍳 Recipe Finder (React V2)</h1>
-        <SearchBar onSearch={handleSearch} />
+        <h1>Find Your Perfect Cocktail</h1>
+        <SearchBar onSearch={setSearchTerm} />
       </header>
-      
-      <main>
-        <div className="results-grid">
-          {/* Loading State */}
-          {isLoading && (
-            <p className="status-message">กำลังค้นหาอาหาร...</p>
-          )}
-
-          {/* Error State */}
-          {error && (
-            <p className="status-message" style={{color: 'red'}}>{error}</p>
-          )}
-
-          {/* No Results */}
-          {!isLoading && !error && meals.length === 0 && searchTerm && (
-            <p className="status-message">ไม่พบอาหารที่ตรงกับคำค้นหา</p>
-          )}
-
-          {/* Welcome Message */}
-          {!isLoading && !error && meals.length === 0 && !searchTerm && (
-            <p className="placeholder">พิมพ์ชื่ออาหารในช่องค้นหาเพื่อเริ่มต้น!</p>
-          )}
-
-          {/* Meal Cards */}
-          {!isLoading && !error && meals.length > 0 && (
-            meals.map(meal => (
-              <MealCard key={meal.idMeal} meal={meal} />
-            ))
-          )}
-        </div>
-      </main>
-    </>
-  )
+      <div className="results-grid">
+        {isLoading && <p className="status-message">Searching for cocktails...</p>}
+        {error && <p className="status-message error">{error}</p>}
+        {!isLoading && !error && drinks.length === 0 && searchTerm && (
+          <p className="status-message">No cocktails found for "{searchTerm}".</p>
+        )}
+        {!isLoading && !error && drinks.length > 0 && (
+          drinks.map(drink => <DrinkCard key={drink.idDrink} drink={drink} />)
+        )}
+      </div>
+    </div>
+  );
 }
-
-export default HomePage
+export default HomePage;

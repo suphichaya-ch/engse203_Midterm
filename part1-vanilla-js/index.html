@@ -3,36 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocktail Finder 🍸 - Vanilla JS</title>
+    <title>Cocktail Finder 🍸</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🍸 Cocktail Finder</h1>
-            <form id="search-form">
-                <input type="text" id="search-input" placeholder="e.g., Margarita, Mojito, Gin...">
-                <button type="submit">Search</button>
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="logo">🍸 Cocktail Finder</h1>
+
+            <!-- Search Form -->
+            <form id="search-form" class="search-form">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    class="search-input" 
+                    placeholder="e.g., Margarita, Mojito, Gin..." 
+                    required
+                >
+                <button type="submit" class="search-button">Search</button>
             </form>
-            <div class="actions-container">
+
+            <!-- Action Buttons -->
+            <div class="actions">
                 <button id="random-btn" class="action-button">🎲 Random Drink</button>
                 <button id="favorites-btn" class="action-button">⭐ Show Favorites</button>
             </div>
         </header>
 
-        <main id="results-container">
+        <!-- Main Results Section -->
+        <main id="results-container" class="results-container">
             <div id="results-grid" class="results-grid">
-                <p class="placeholder">Type something in the search box to find cocktails!</p>
+                <p class="placeholder">พิมพ์ชื่อค็อกเทลในช่องค้นหาเพื่อหาค็อกเทลที่คุณชอบ!</p>
             </div>
         </main>
 
-        <section id="details-container" class="hidden"></section>
+        <!-- Cocktail Details Section -->
+        <section id="details-container" class="details hidden"></section>
 
-        <section id="favorites-container" class="hidden">
+        <!-- Favorites Section -->
+        <section id="favorites-container" class="favorites hidden">
             <h2>⭐ My Favorite Drinks</h2>
             <div id="favorites-grid" class="results-grid"></div>
         </section>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

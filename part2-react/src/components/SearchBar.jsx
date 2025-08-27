@@ -6,24 +6,15 @@ function SearchBar({ onSearch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (term.trim()) {
-      onSearch(term);
+      onSearch(term.trim());
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="search-bar">
-      <input 
-        type="text" 
-        placeholder="Search for a meal..." 
-        value={term} 
-        onChange={(e) => setTerm(e.target.value)} 
-      />
+    <form id="search-form" onSubmit={handleSubmit}>
+      <input type="text" id="search-input" value={term} onChange={(e) => setTerm(e.target.value)} placeholder="e.g., Margarita, Mojito, Gin..." />
       <button type="submit">Search</button>
     </form>
   );
 }
-
-
 export default SearchBar;
-
-

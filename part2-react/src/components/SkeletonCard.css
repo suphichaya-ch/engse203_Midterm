@@ -1,0 +1,6 @@
+/* src/components/SkeletonCard.css */
+.skeleton-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
+.skeleton { animation: shimmer 1.5s infinite linear; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.skeleton-img { height: 200px; width: 100%; }
+.skeleton-text { height: 20px; width: 80%; margin: 1rem; border-radius: 4px; }
